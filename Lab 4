@@ -1,44 +1,50 @@
-TODAYS_DAY = 20
-TODAYS_MONTH = 6
-TODAYS_YEAR = 2022
-
-day = 0
-month = 0
-year = 0
-
-# doesn't work
-#while day >= 1 and day <= 31:
-
-#while day < 1 or day > 31:
-
-while not (1 <= day <= 31):
-    day = int(input("Enter the day of the month: 1-31 "))
-
-while not (1 <= month <= 12):
-    month = int(input("Enter the month: 1-12 "))
-
-while not (2023 <= year <= 2099):
-    year = int(input("Enter the year: 2023-2099 "))
-
-days_until_date = 0
 
 
-days_until_date = day - TODAYS_DAY
+import random
+import cmath
 
-if month < TODAYS_MONTH:
-    months = 12 - (TODAYS_MONTH - month)
-    year -= 1
-else:
-    months = month - TODAYS_MONTH
+def affirmation_generator():
+    # Generate a random value between 1 and 5
+    random_value = random.randint(1, 5)
+    
+    # Use a dictionary to map each random value to a specific affirmation
+    affirmations = {
+        1: "You are capable of amazing things.",
+        2: "You radiate positivity and confidence.",
+        3: "Success is inevitable for you.",
+        4: "Every challenge is an opportunity for growth.",
+        5: "Your potential is limitless."
+    }
 
-days_until_date += int(months * 30.5)
+    # Retrieve the corresponding affirmation for the random value
+    affirmation = affirmations.get(random_value, "Invalid random value")
+    
+    # Print the selected affirmation
+    print("Affirmation:", affirmation)
 
-days_until_date += 365 * (year - TODAYS_YEAR)
+def quadratic_equation_intercept_finder(a, b, c):
+    # Calculate the discriminant
+    discriminant = b**2 - 4*a*c
 
-print(days_until_date, "days until your date ( approximately ) ")
+    # Check if there are real intercepts
+    if discriminant < 0:
+        return "No real intercepts exist."
 
+    # Calculate the x-intercepts using the quadratic formula
+    first_x_intercept = (-b + cmath.sqrt(discriminant)) / (2*a)
+    second_x_intercept = (-b - cmath.sqrt(discriminant)) / (2*a)
 
-for hour in range(24): # 0-23
-    for minute in range(60): # 0-59
-        for second in range(60): #0-59
-            print(f'{hour:>02}:{minute:>02}:{second:>02}')
+    # Return the x-intercepts as a tuple
+    return first_x_intercept, second_x_intercept
+
+# Example usage:
+print("----- Affirmation Generator -----")
+affirmation_generator()
+
+print("\n----- Quadratic Equation Intercept Finder -----")
+# Example usage for quadratic equation with coefficients a=1, b=-3, c=2
+a = 1
+b = -3
+c = 2
+intercepts = quadratic_equation_intercept_finder(a, b, c)
+print("Intercepts:", intercepts)
