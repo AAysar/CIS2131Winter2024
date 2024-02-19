@@ -1,1 +1,80 @@
+'''pseudocode  
+FUNCTION is_valid_date(month, day, year):
+    // Check if the provided month, day, and year fall within valid ranges
+    RETURN (1 <= month <= 12) AND (1 <= day <= 31) AND (2023 <= year <= 2099)
+
+FUNCTION days_until_date(target_date):
+    // Calculate the number of days until the target date from the current date
+    today = current_date()
+    remaining_days = (target_date - today).days
+    RETURN remaining_days
+
+FUNCTION main():
+    // Repeat until valid input is provided
+    REPEAT
+        TRY
+            // Prompt the user to enter the month, day, and year
+            INPUT month
+            INPUT day
+            INPUT year
+        EXCEPT ValueError
+            // Handle the case where non-integer values are entered
+            OUTPUT "Invalid input. Please enter valid integers."
+            CONTINUE
+        
+        // Check if the entered date is valid
+        IF is_valid_date(month, day, year)
+            BREAK
+        ELSE
+            // Inform the user about an invalid date and ask for input again
+            OUTPUT "Invalid date. Please enter a valid date."
+
+    // Create a date object for the entered date
+    target_date = create_date(year, month, day)
+    
+    // Calculate the number of days until the target date
+    remaining_days = days_until_date(target_date)
+
+    // Display the results
+    OUTPUT "Today's date:", current_date()
+    OUTPUT "Target date:", target_date
+    OUTPUT "Days until the target date:", remaining_days, "days"
+
+'''
+
+from datetime import date
+
+def is_valid_date(month, day, year):
+    # Validate month, day, and year ranges
+    return 1 <= month <= 12 and 1 <= day <= 31 and 2023 <= year <= 2099
+
+def days_until_date(target_date):
+    today = date.today()
+    remaining_days = (target_date - today).days
+    return remaining_days
+
+def main():
+    # Get user input for date
+    while True:
+        try:
+            month = int(input("Enter the month (1-12): "))
+            day = int(input("Enter the day (1-31): "))
+            year = int(input("Enter the year (2023-2099): "))
+        except ValueError:
+            print("Invalid input. Please enter valid integers.")
+            continue
+        
+        if is_valid_date(month, day, year):
+            break
+        else:
+            print("Invalid date. Please enter a valid date.")
+
+    # Calculate days until the specified date
+    target_date = date(year, month, day)
+    remaining_days = days_until_date(target_date)
+
+    # Display the result
+    print(f"Today's date: {date.today()}")
+    print(f"Target date: {target_date}")
+    print(f"Days until the target date: {remaining_days} days")
 
