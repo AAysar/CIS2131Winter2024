@@ -1,3 +1,12 @@
+Project 4:  registration system
+Write a pseudocode and program to create a registration system where the user can create aa class by name like CIS 2131 Python Programming, and have a list of students registered
+- allow the user to create as many classes as they want, include a maximum class size and don't allow more students than that to register.
+- when a student registers for a class, add their name to the roster, if there is room
+- add a method for printing a student's list of classes, need to look at all the class rosters?
+- allow students to un-enroll from a class ( remove them from the roster ) ( don't forget to update the class file )
+- two modes, administrator mode and student mode in administrator mode, allow creating, updating, deleting classes, and printing class rosters in student mode, allow enrolling, printing schedules and un-enrolling from classes.
+
+
 To solve this problem, you can follow these steps:
 
 Define Class Structure: Create a class structure to represent classes and students. This class should have attributes like class name, maximum size, and a list to store enrolled students.
