@@ -1,0 +1,44 @@
+To solve this problem, you can follow these steps:
+
+Define Class Structure: Create a class structure to represent classes and students. This class should have attributes like class name, maximum size, and a list to store enrolled students.
+
+Implement Administrator Mode:
+Allow administrators to add, update, and delete classes.
+Provide functionality to print class rosters.
+
+Implement Student Mode:
+Allow students to enroll in classes.
+Enable students to view their enrolled classes and un-enroll from them if needed.
+
+Ensure Data Integrity:
+Implement checks to ensure that the maximum class size is not exceeded when enrolling students.
+
+Data Storage:
+Decide on a method for storing class information and student enrollments. This could be done using files (e.g., CSV or text files) or databases.
+
+Testing:
+Test the system thoroughly to ensure that all functionalities work as expected.
+Include both positive and negative test cases to validate the system's behavior in different scenarios.
+
+Error Handling:
+Implement error handling to handle exceptions gracefully and provide meaningful error messages to users when something goes wrong.
+
+Documentation:
+Document your code thoroughly to make it easier for others to understand and maintain.
+By following these steps, you can create a robust registration system that meets the requirements outlined in the problem statement. 
+Remember to iterate and refine your solution based on feedback and real-world usage to improve its usability and reliability.
+
+Here is sugistion output:
+Do you want (a)dmin mode or (s)tudent mode? a
+do you want to take more actions? y/n y
+Do you want (a)dmin mode or (s)tudent mode?s
+1 - enroll in a class
+2 - un-enroll from a class
+3 - print list of classes1
+Please enter the class nameCIS 2131
+Please enter your full nameAAA BBBB
+do you want to take more actions? y/n n
+
+
+
+
