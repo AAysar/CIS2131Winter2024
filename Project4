@@ -51,3 +51,113 @@ do you want to take more actions? y/n n
 
 
 
+
+def is_class_in_class_list_or_print_message(class_list, class_name):
+    if class_name not in class_list:
+        print("That class is not in the system")
+        return False
+    return True
+
+def get_class_name():
+    class_name = input("Please enter the class name")
+    return class_name
+
+class_list = {}
+
+# class_list['CIS 2131'] = {}
+# class_list['CIS 2131']['max_size'] = 27
+# class_list['CIS 2131']['student_list'] = []
+#
+# class_list['CIS 2131']['student_list'].append("Jeb")
+# class_list['CIS 2131']['student_list'].append("Journey")
+
+class_file = open("class_file.txt")
+class_data = class_file.readlines()
+class_file.close()
+for line in class_data:
+    data = line.strip().split("|")
+    class_list[data[0]] = {}
+    class_list[data[0]]['max_size'] = int(data[1])
+    class_list[data[0]]['student_list'] = []
+    for index in range(2, len(data)):
+        class_list[data[0]]['student_list'].append(data[index])
+
+more_actions = 'y'
+
+while more_actions == 'y':
+    mode = input("Do you want (a)dmin mode or (s)tudent mode?").lower()
+
+    if mode == 'a':
+        admin_action = input("1 - add a class\n"
+                             "2 - update a class\n"
+                             "3 - delete a class\n"
+                             "4 - print a class roster")
+
+        if admin_action == "1":
+            class_name = get_class_name()
+            max_size = int(input("Please enter the max class size"))
+            if class_name not in class_list:
+                class_list[class_name] = {}
+                class_list[class_name]['max_size'] = max_size
+                class_list[class_name]['student_list'] = []
+            else:
+                print("That class is already in the system, please update")
+        elif admin_action == "2":
+            class_name = get_class_name()
+            if is_class_in_class_list_or_print_message(class_list, class_name):
+                print(f"The current max class size is {class_list[class_name]['max_size']}")
+                max_size = int(input("Please enter the new max class size"))
+                class_list[class_name]['max_size'] = max_size
+        elif admin_action == "3":
+            class_name = get_class_name()
+            if is_class_in_class_list_or_print_message(class_list, class_name):
+                class_list.pop(class_name)
+        elif admin_action == "4":
+            class_name = get_class_name()
+            if is_class_in_class_list_or_print_message(class_list, class_name):
+                print("List of students enrolled:")
+                for student in class_list[class_name]['student_list']:
+                    print(student)
+
+    elif mode == "s":
+        student_action = input("1 - enroll in a class\n"
+                             "2 - un-enroll from a class\n"
+                             "3 - print list of classes")
+
+        if student_action == "1":
+            class_name = get_class_name()
+            if is_class_in_class_list_or_print_message(class_list, class_name):
+                if len(class_list[class_name]['student_list']) < class_list[class_name]['max_size']:
+                    student_name = input("Please enter your full name")
+                    class_list[class_name]['student_list'].append(student_name)
+                else:
+                    print("I'm sorry, that class is full")
+        elif student_action == "2":
+            class_name = get_class_name()
+            if is_class_in_class_list_or_print_message(class_list, class_name):
+                student_name = input("Please enter your full name")
+                if student_name in class_list[class_name]['student_list']:
+                    class_list[class_name]['student_list'].remove(student_name)
+                else:
+                    print("You weren't enrolled in that class")
+        elif student_action == "3":
+            student_name = input("Please enter your full name")
+            for class_name in class_list:
+                if student_name in class_list[class_name]['student_list']:
+                    print(class_name)
+
+    more_actions = input("do you want to take more actions? y/n ").lower()
+
+class_file = open("class_file.txt", 'w')
+
+for class_name in class_list:
+    class_file.write(class_name)
+    class_file.write("|")
+    class_file.write(str(class_list[class_name]['max_size']))
+    for student in class_list[class_name]['student_list']:
+       class_file.write("|")
+       class_file.write(student)
+    class_file.write("\n")
+
+class_file.close()
+
